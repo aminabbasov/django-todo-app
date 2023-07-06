@@ -1,0 +1,49 @@
+{% extends 'main.html' %}
+
+{% block dropdown %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% endblock dropdown %}
+
+
+{% block content %}
+
+<form method="post" id="RegisterForm">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="InputUsername" class="form-label">Username</label>
+    {{ form.username }}
+  </div>
+  <div class="mb-3">
+    <label for="InputPassword1" class="form-label">Password</label>
+    {{ form.password1 }}
+  </div>
+  <div class="mb-3">
+    <label for="InputPassword2" class="form-label">Password confirmation</label>
+    {{ form.password2}}
+  </div>
+  <div class="mb-3">
+    <p class="form-label">Captcha</p>
+    {{ form.captcha }}
+  </div>
+</form>
+
+{% endblock content %}
+
+
+{% block footer %}
+
+<label>
+Already have an account? <a href="{% url 'login-page' %}">Login</a>
+</label>
+
+<button type="submit" class="btn btn-primary" form="RegisterForm">Submit</button>
+
+{% endblock footer %}

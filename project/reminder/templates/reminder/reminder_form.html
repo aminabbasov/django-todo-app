@@ -1,0 +1,76 @@
+{% extends 'main.html' %}
+
+{% block dropdown %}
+
+{{ form.selected_color }}
+
+{% endblock dropdown %}
+
+
+{% block content %}
+<form id="myform" method="POST">
+  {% csrf_token %}
+  {{ form.title }}
+</form>
+{% endblock content %}
+
+
+{% block footer %}
+
+{% if form.instance.id %}
+
+  <!-- Modal Button -->
+  <button type="button" class="me-2 btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal">
+    Delete
+  </button>
+
+  <!-- The Modal -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Delete task</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <p>Are your sure you want to delete this task?</p>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <form method="POST" action="{% url 'delete-page' pk=reminder.pk %}">
+            {% csrf_token %}
+            <input class="btn btn-danger" type="submit" value="Delete">
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="align-content-end">
+    <a href="{% url 'list-page' %}" class="me-2 btn btn-outline-primary" role="button">Cancel</a>
+    <input type="submit" class="btn btn-success" form="myform" value="Save task">
+  </div>
+
+{% else %}
+
+  <style>
+    .stand-right {
+      margin-left: auto; {# НЕ РАБОТАЕТ CSS #}
+    }
+  </style>
+
+  <div class="align-content-end stand-right">
+    <a href="{% url 'list-page' %}" class="me-2 btn btn-outline-primary" role="button">Cancel</a>
+    <input type="submit" class="btn btn-success" form="myform" value="Save task">
+  </div>
+
+{% endif %}
+
+{% endblock footer %}

@@ -1,0 +1,28 @@
+.sortlist {
+  display: none;
+}
+
+.TaskLink {
+  color: inherit;
+  text-decoration: inherit;
+}
+  
+.TaskLink:hover {
+  color: black;
+  font-weight: bold;
+}
+
+.stand-right {
+  margin-left: auto;
+}
+
+.emptylist {
+  text-align: center;
+  position: relative;
+  margin: 0;
+  position: absolute;
+  top: 47%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}

@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+
+{% block dropdown %}
+
+{% endblock dropdown %}
+
+
+{% block content %}
+
+<div style="">
+
+    <form method="post" id="LoginForm">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="InputUsername" class="form-label">Username</label>
+        {{ form.username }}
+      </div>
+      <div class="mb-3">
+        <label for="InputPassword1" class="form-label">Password</label>
+        {{ form.password }}
+      </div>
+      <div class="mb-3">
+        <p class="form-label">Captcha</p>
+        {{ form.captcha }}
+      </div>
+    <form>
+
+</div>
+
+{% endblock content %}
+
+
+{% block footer %}
+
+<label>
+  Don't have an account? <a href="{% url 'register-page' %}">Register</a>
+</label>
+  
+<button type="submit" class="btn btn-primary" form="LoginForm">Submit</button>
+
+{% endblock footer %}

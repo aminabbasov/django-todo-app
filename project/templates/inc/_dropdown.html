@@ -1,0 +1,45 @@
+<div class="dropdown dropend">
+  <a
+    href="{% url dropdown_url %}" {# {{ dropdown_url }} #}
+    class="btn btn-primary"
+    role="button"
+    data-bs-toggle="dropdown dropend"
+    aria-expanded="false"
+    id="dropdownMenuButton1">
+    {{ dropdown_name }}
+  </a>
+  <button
+    type="button"
+    class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+    aria-labelledby="dropdownMenuButton1">
+  </button>
+
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><h6 class="dropdown-header">Sort by</h6></li>
+    {# <form action="{{ dropdown_sort_url }}" method="get"> #}
+    <form method="get">
+      <input type="radio" name="sort" id="1" value="title" class="dropdown-item sortlist" onclick="this.form.submit()">
+      <label for="1" class="dropdown-item">Name (from A to Z)</label>
+      <input type="radio" name="sort" id="2" value="-title" class="dropdown-item sortlist" onclick="this.form.submit()">
+      <label for="2" class="dropdown-item">Name (from Z to A)</label>
+      <input type="radio" name="sort" id="3" value="-updated_at" class="dropdown-item sortlist" onclick="this.form.submit()">
+      <label for="3" class="dropdown-item">Last updated (from new)</label>
+      <input type="radio" name="sort" id="4" value="updated_at" class="dropdown-item sortlist" onclick="this.form.submit()">
+      <label for="4" class="dropdown-item">Last updated (from old)</label>
+      <input type="radio" name="sort" id="5" value="-created_at" class="dropdown-item sortlist" onclick="this.form.submit()">
+      <label for="5" class="dropdown-item">Created date (from new)</label>
+      <input type="radio" name="sort" id="6" value="created_at" class="dropdown-item sortlist" onclick="this.form.submit()">
+      <label for="6" class="dropdown-item">Created date (from old)</label>
+      <input type="radio" name="sort" id="7" value="selected_color" class="dropdown-item sortlist" onclick="this.form.submit()">
+      <label for="7" class="dropdown-item">Color</label>
+    </form>
+    <li><hr class="dropdown-divider"/></li>
+    <li>
+      <h6 class="dropdown-header">{{ request.user }}</h6>
+      <a class="dropdown-item" style="color: red" href="{% url 'logout-action' %}">Logout</a>
+    </li> 
+  </ul>
+
+</div>

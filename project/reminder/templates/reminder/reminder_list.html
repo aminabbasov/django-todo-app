@@ -1,0 +1,88 @@
+{% extends 'main.html' %}
+{% load coloration %}
+
+{% block dropdown %}
+
+{% if url == 'active' %}  {# {% url 'archive-page' as dropdown_url %} #}
+  {% include 'inc/_dropdown.html' with dropdown_name='Completed tasks' dropdown_url='archive-page' %}
+{% endif %}
+
+{% if url == 'archive' %}
+  {% include 'inc/_dropdown.html' with dropdown_name='Active tasks' dropdown_url='list-page' %}
+{% endif %}
+
+{% if url == 'search' %}
+  <div class="dropdown dropend">
+    <a href="{% url 'list-page' %}" class="btn btn-dark">
+      Return back
+    </a>
+  </div>
+{% endif %}
+
+{% endblock dropdown %}
+
+
+{% block content %}
+<table class="table table-hover">
+
+  <tbody>
+    {% for reminder in reminders %}
+      <tr style="background-color: {{ reminder.selected_color|colorize }};">
+
+        <th class="align-middle text-center" scope="row" style="width:5%">
+          {% if reminder.is_completed %}
+
+            <form action="{% url 'unarchive-action' reminder.pk %}" method="POST">
+              {% csrf_token %}
+              <input class="form-check-input" type="checkbox" onchange="this.form.submit()" checked>
+            </form>
+
+          {% else %}
+
+            <form action="{% url 'archive-action' reminder.pk %}" method="POST">
+              {% csrf_token %}
+              <input class="form-check-input" type="checkbox" onchange="this.form.submit()">
+            </form>
+
+          {% endif %}
+        </th>
+
+        <td>
+          <a href="{{ reminder.get_absolute_url }}" class="TaskLink">
+            <div style="height: 100%; width: 100%;">
+              {{ reminder.title }}
+            </div>
+          </a>
+        </td>
+
+      </tr>
+    {% empty %}
+      {% if url == 'active' %}
+        <div class="emptylist">
+          <h1 class="display-6">You don't have any task yet.</h1>
+          <h1 class="display-6">Create a <a style="text-decoration: none; color: #blue;" href="{% url 'create-page' %}"><b>new task</b></a>!</h1>
+        </div>
+      {% endif %}
+
+      {% if url == 'archive' %}
+      <div class="emptylist">
+          <h1 class="display-6">You don't have completed tasks yet.</h1>
+          <h1 class="display-6">Go back to <a style="text-decoration: none; color: #blue;" href="{% url 'list-page' %}"><b>home page</b></a>.</h1>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </tbody>
+
+</table>
+{% endblock content %}
+
+
+{% block footer %}
+{% include 'inc/_search.html' %}
+
+<div class="align-content-lg-end">
+  <a href="{% url 'create-page' %}" class="btn btn-primary">
+    Add Task
+  </a>
+</div>
+{% endblock footer %}
