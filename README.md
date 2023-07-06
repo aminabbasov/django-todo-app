@@ -11,6 +11,20 @@
 pip install -r requirements.txt
 ```
 
+## Запуск
+
+Выполните миграции.
+
+```bash
+python manage.py migrate
+```
+
+Запустите локальный сервер.
+
+```bash
+python manage.py runserver
+```
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
