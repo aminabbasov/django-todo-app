@@ -5,7 +5,7 @@
 ## Установка
 
 Для этого проекта требуется Python 3.8 или выше.
-Используйте пакетный менеджер [pip](https://pip.pypa.io/en/stable/) для утановки.
+Используйте пакетный менеджер [pip](https://pip.pypa.io/en/stable/) для установки.
 
 ```bash
 pip install -r requirements.txt
